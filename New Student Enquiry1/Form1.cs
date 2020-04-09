@@ -41,7 +41,7 @@ namespace New_Student_Enquiry1
             cbxHowDidYouHear.Items.Add("Internet search");
 
         }
-               
+
         private void cbxDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
             lstDegrees.ClearSelected(); // fires the selection changed event
@@ -51,7 +51,7 @@ namespace New_Student_Enquiry1
 
             string department = cbxDepartment.Text;
 
-            if(department != null) 
+            if (department != null)
             {
                 //Fetch the Array of degrees from the SortedList, show in ListBox
                 // Remember the keys in the SortedList are the names of programs
@@ -59,7 +59,12 @@ namespace New_Student_Enquiry1
                 string[] degrees = programs[department];
                 lstDegrees.Items.AddRange(degrees);
             }
+        }
 
+        private void lstDegrees_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int numberSelected = lstDegrees.SelectedItems.Count;
+            lblDegreeCount.Text = $"{numberSelected} selected";
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -96,6 +101,9 @@ namespace New_Student_Enquiry1
             summaryBuilder.Append(cbxDepartment.Text);
 
             summaryBuilder.Append("\n\nPrograms:  ");
+            summaryBuilder.Append(lblDegreeCount.Text );
+            summaryBuilder.Append("\n");
+
 
             foreach (object degree in lstDegrees.SelectedItems)
             {
@@ -112,11 +120,6 @@ namespace New_Student_Enquiry1
 
             this.Close();
         }
-        
-        private void lstDegrees_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int numberSelected = lstDegrees.SelectedItem.Count;//Tally numbers of degree programs selected
-            lblDegreeCount.Text = $"{numberSelected} selected";
-        }
     }
-}
+}    
+
