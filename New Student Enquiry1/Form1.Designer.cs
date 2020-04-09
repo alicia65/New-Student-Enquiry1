@@ -90,7 +90,7 @@
             this.lstDegrees.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lstDegrees.Size = new System.Drawing.Size(448, 84);
             this.lstDegrees.TabIndex = 5;
-            this.lstDegrees.SelectedIndexChanged += new System.EventHandler(this.lstDegrees_SelectedIndexChanged);
+            
             // 
             // lblDegreeCount
             // 
