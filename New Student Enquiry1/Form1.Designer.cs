@@ -45,6 +45,7 @@
             this.btnSubmit.TabIndex = 2;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // cbxDepartment
             // 
@@ -89,8 +90,9 @@
             this.lstDegrees.Name = "lstDegrees";
             this.lstDegrees.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lstDegrees.Size = new System.Drawing.Size(448, 84);
+            this.lstDegrees.Sorted = true;
             this.lstDegrees.TabIndex = 5;
-            
+            this.lstDegrees.SelectedIndexChanged += new System.EventHandler(this.lstDegrees_SelectedIndexChanged);
             // 
             // lblDegreeCount
             // 

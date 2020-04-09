@@ -44,6 +44,9 @@ namespace New_Student_Enquiry1
                
         private void cbxDepartment_SelectedIndexChanged(object sender, EventArgs e)
         {
+            lstDegrees.ClearSelected(); // fires the selection changed event
+            //Otherwise, the number of degrees selected doesn't reset to 0
+
             lstDegrees.Items.Clear();
 
             string department = cbxDepartment.Text;
@@ -57,6 +60,63 @@ namespace New_Student_Enquiry1
                 lstDegrees.Items.AddRange(degrees);
             }
 
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            //Generate a list of each error with the form
+            List<string> errors = new List<string>();
+
+            if (cbxDepartment.SelectedIndex == -1)
+            {
+                errors.Add("Select a semester");
+            }
+
+            if (lstDegrees.SelectedIndex == -1)
+            {
+                errors.Add("Select at least one degree");
+            }
+
+            //Because user can type, whatever they type is considered to be index -1
+            if (String.IsNullOrEmpty(cbxHowDidYouHear.Text))
+            {
+                errors.Add("Type or select how you heard about us");
+            }
+
+            if (errors.Count > 0)
+            {
+                MessageBox.Show(String.Join("\n", errors), "Error");
+                return;
+            }
+
+            StringBuilder summaryBuilder = new StringBuilder();
+
+            summaryBuilder.Append("Summary");
+            summaryBuilder.Append("\n\nDepartment:  ");
+            summaryBuilder.Append(cbxDepartment.Text);
+
+            summaryBuilder.Append("\n\nPrograms:  ");
+
+            foreach (object degree in lstDegrees.SelectedItems)
+            {
+                summaryBuilder.Append(degree);
+                summaryBuilder.Append("\n");
+            }
+
+            summaryBuilder.Append("\nYou heard about us from: ");
+            summaryBuilder.Append(cbxHowDidYouHear.Text);
+
+            string summary = summaryBuilder.ToString();
+
+            MessageBox.Show(summary, "Thank you!");
+
+            this.Close();
+        }
+        
+        private void lstDegrees_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int numberSelected = lstDegrees.SelectedItem.Count;//Tally numbers of degree programs selected
+            lblDegreeCount.Text = $"{numberSelected} selected";
         }
     }
 }
